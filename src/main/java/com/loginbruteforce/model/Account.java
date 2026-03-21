@@ -38,7 +38,8 @@ public class Account {
         this.id = id;
         this.issuer = issuer;
         this.accountName = accountName;
-        this.secret = secret;
+        // Strip out any padding '=' characters which can break authenticator apps
+        this.secret = secret != null ? secret.replace("=", "") : null;
     }
 
     public String getId() { return id; }
