@@ -46,23 +46,8 @@ public class Account {
     public String getAccountName() { return accountName; }
     public String getSecret() { return secret; }
 
-    /**
-     * Serializes this account to a JSON object string for file storage.
-     *
-     * @return a JSON string representation
-     */
-    public String toJson() {
-        return String.format(
-                "{\"id\":\"%s\",\"issuer\":\"%s\",\"accountName\":\"%s\",\"secret\":\"%s\"}",
-                escapeJson(id), escapeJson(issuer), escapeJson(accountName), escapeJson(secret));
-    }
-
     @Override
     public String toString() {
         return issuer + " (" + accountName + ")";
-    }
-
-    private static String escapeJson(String value) {
-        return value.replace("\"", "\\\"");
     }
 }
