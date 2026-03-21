@@ -4,6 +4,7 @@ import com.loginbruteforce.totp.TOTPHelper;
 import com.loginbruteforce.model.Account;
 import com.loginbruteforce.util.Logger;
 import com.loginbruteforce.MainController;
+import com.loginbruteforce.auth.LogManager;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -90,6 +91,7 @@ public class TwoFAPanel extends JPanel {
         if (TOTPHelper.verifyCode(totpSecret, code)) {
             onSuccess(username, email);
         } else {
+            LogManager.log(username, "FAILURE", "Wrong 2FA code");
             handleFailedAttempt(username, email, "Invalid Authenticator Code.");
         }
     }
@@ -113,6 +115,7 @@ public class TwoFAPanel extends JPanel {
             if (authManager.useBackupCode(username, code)) {
                 onSuccess(username, email);
             } else {
+                LogManager.log(username, "FAILURE", "Invalid backup code");
                 handleFailedAttempt(username, email, "Invalid or already-used Backup Code.");
             }
         }
@@ -122,6 +125,7 @@ public class TwoFAPanel extends JPanel {
 
     private boolean isLockedOut(String username, String email) {
         if (authManager.is2FALocked(username)) {
+            LogManager.log(username, "FAILURE", "2FA locked");
             Logger.log(email, "2FA Blocked — Account Locked (Too Many Attempts)");
             showError("Too many failed 2FA attempts.\nAccount locked for 15 minutes.");
             codeField.setText("");

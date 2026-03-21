@@ -24,10 +24,12 @@ public class HomePanel extends JPanel {
 
         JButton registerButton = new JButton("Register");
         JButton loginButton = new JButton("Login");
+        JButton logsButton = new JButton("View Logs");
         JButton exitButton = new JButton("Exit");
 
         registerButton.addActionListener(e -> controller.navigateTo("REGISTER"));
         loginButton.addActionListener(e -> controller.navigateTo("LOGIN"));
+        logsButton.addActionListener(e -> controller.navigateTo("LOGS"));
         exitButton.addActionListener(e -> System.exit(0));
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -36,6 +38,7 @@ public class HomePanel extends JPanel {
 
         gbc.gridy = 0; add(registerButton, gbc);
         gbc.gridy = 1; add(loginButton, gbc);
-        gbc.gridy = 2; add(exitButton, gbc);
+        gbc.gridy = 2; add(logsButton, gbc);
+        gbc.gridy = 3; add(exitButton, gbc);
     }
 }

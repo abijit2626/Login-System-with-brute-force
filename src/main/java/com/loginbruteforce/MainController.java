@@ -6,6 +6,7 @@ import com.loginbruteforce.ui.HomePanel;
 import com.loginbruteforce.ui.LoginPanel;
 import com.loginbruteforce.ui.RegisterPanel;
 import com.loginbruteforce.ui.GeneratorPanel;
+import com.loginbruteforce.ui.LogPanel;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -120,6 +121,7 @@ public class MainController extends JFrame {
             console.registerView(new LoginPanel(console), "LOGIN");
             console.registerView(new RegisterPanel(console), "REGISTER");
             console.registerView(new TwoFAPanel(console), "2FA");
+            console.registerView(new LogPanel(console), "LOGS");
 
             GeneratorPanel generatorPanel = new GeneratorPanel(console);
             console.registerView(generatorPanel, "GENERATOR");

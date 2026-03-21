@@ -12,6 +12,7 @@ import java.sql.SQLException;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import com.loginbruteforce.auth.LogManager;
 /**
  * Core authentication engine handling user registration, credential
  * verification, TOTP/backup-code management, and brute-force protection.
@@ -174,11 +175,18 @@ public class AuthManager extends BaseAuth {
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                return checkPassword(password, rs.getString("password_hash"));
+                if (checkPassword(password, rs.getString("password_hash"))) {
+                    LogManager.log(username, "SUCCESS", null);
+                    return true;
+                } else {
+                    LogManager.log(username, "FAILURE", "Wrong password");
+                    return false;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        LogManager.log(username, "FAILURE", "Wrong password");
         return false;
     }
 
@@ -294,6 +302,7 @@ public class AuthManager extends BaseAuth {
                         resetFailedAttempts(username);
                         return false;
                     }
+                    LogManager.log(username, "FAILURE", "Account locked");
                     return true;
                 }
                 return locked;

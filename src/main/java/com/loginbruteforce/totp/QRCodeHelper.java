@@ -35,8 +35,8 @@ public final class QRCodeHelper {
      */
     public static String buildOtpAuthUri(String username, String base32Secret) {
         try {
-            String encodedIssuer = URLEncoder.encode(ISSUER, CHARSET);
-            String encodedUser = URLEncoder.encode(username, CHARSET);
+            String encodedIssuer = URLEncoder.encode(ISSUER, CHARSET).replace("+", "%20");
+            String encodedUser = URLEncoder.encode(username, CHARSET).replace("+", "%20");
             return String.format("otpauth://totp/%s:%s?secret=%s&issuer=%s",
                     encodedIssuer, encodedUser, base32Secret, encodedIssuer);
         } catch (UnsupportedEncodingException e) {

@@ -56,9 +56,10 @@ public final class DatabaseHelper {
 
         String logsTable = "CREATE TABLE IF NOT EXISTS login_logs ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "email TEXT, "
-                + "status TEXT, "
-                + "timestamp DATETIME DEFAULT CURRENT_TIMESTAMP"
+                + "username TEXT NOT NULL, "
+                + "event_time TEXT NOT NULL, "
+                + "status TEXT NOT NULL, "
+                + "reason TEXT"
                 + ");";
 
         String failedAttemptsTable = "CREATE TABLE IF NOT EXISTS failed_attempts ("

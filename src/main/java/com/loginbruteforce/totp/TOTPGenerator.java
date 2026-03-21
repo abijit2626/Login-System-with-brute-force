@@ -53,7 +53,7 @@ public final class TOTPGenerator {
                            | ((hash[offset + 2] & 0xFF) << 8)
                            | (hash[offset + 3] & 0xFF);
 
-            return String.format("%0" + CODE_DIGITS + "d", truncated % CODE_MODULUS);
+            return String.format(java.util.Locale.US, "%0" + CODE_DIGITS + "d", truncated % CODE_MODULUS);
         } catch (NoSuchAlgorithmException | InvalidKeyException | IllegalArgumentException e) {
             e.printStackTrace();
             return "ERROR ";

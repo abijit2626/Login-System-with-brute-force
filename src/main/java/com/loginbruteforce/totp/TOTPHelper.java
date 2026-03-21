@@ -72,7 +72,7 @@ public final class TOTPHelper {
                            | ((hash[offset + 2] & 0xFF) << 8)
                            | (hash[offset + 3] & 0xFF);
 
-            return String.format("%0" + CODE_DIGITS + "d", truncated % CODE_MODULUS);
+            return String.format(java.util.Locale.US, "%0" + CODE_DIGITS + "d", truncated % CODE_MODULUS);
         } catch (NoSuchAlgorithmException | InvalidKeyException e) {
             e.printStackTrace();
             return "0".repeat(CODE_DIGITS);
